@@ -7,18 +7,19 @@ import { SiteConfig } from '../types';
 
 export const getDefaultConfig = (): SiteConfig => ({
   network: 'testnet',
-  owner: '',
-  site_name: 'default-site',
+  owner: '0x7c484896d088f2eb3012cac48de62fd4ec02c54540cbb1cd5e312e02216d055a',
+  site_name: 'sui-nova',
   metadata: {
-    link: '',
-    image_url: '',
-    name: 'Walrus Site',
-    description: '',
-    project_url: '',
-    creator: '',
+    link: 'https://sui-nova.wal.app/',
+    image_url: 'https://myproject.xyz/preview.png',
+    name: 'My Project',
+    description: 'A decentralized web app deployed on Walrus.',
+    project_url: 'https://github.com/my-org/my-walrus-site',
+    creator: 'my-org',
   },
-  epochs: 30,
+  epochs: 5,
   path: './dist',
+  write_retry_limit: 3,
 });
 
 export const loadConfig = (): SiteConfig => {

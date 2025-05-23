@@ -157,8 +157,6 @@ export const registerBlobs = async ({
     core.info(JSON.stringify(walrusSystem));
 
     const regisered: TransactionResult[] = [];
-    walrusSystem.subsidiesObjectId =
-      '0x09463150f6f1645567b23b57ab59a01b4ef24b8cce0b5d458ea0cecbbf3402c2';
 
     const subsidiesObject = walrusSystem.subsidiesObjectId
       ? transaction.object(walrusSystem.subsidiesObjectId)
