@@ -1,0 +1,18 @@
+name: 'Walrus Sites Provenance'
+description: 'Deploy Walrus Sites with verifiable SLSA provenance and optional remote signer support.'
+author: 'zktx.io'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+env:
+  GIT_SIGNER_PIN:
+    description: 'PIN used to decrypt the signing key, shared with the remote signer UI.'
+    required: false
+  ED25519_PRIVATE_KEY:
+    description: 'Fallback private key in Sui format (e.g., suiprivkey...), used when remote signing is not enabled.'
+    required: true
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
