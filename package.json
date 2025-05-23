@@ -37,7 +37,8 @@
     "test": "jest",
     "ci-test": "jest",
     "coverage": "jest --coverage",
-    "build": "rimraf dist && npx ncc build src/index.ts -o dist --source-map --license licenses.txt"
+    "build": "rimraf dist && npx ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
@@ -63,6 +64,7 @@
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.3.1",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }
