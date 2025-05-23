@@ -58985,9 +58985,13 @@ const registerBlobs = async ({ config, suiClient, walrusClient, walrusSystem, gr
         const [...writeCoins] = transaction.splitCoins(coin, amounts.map(a => a.writeCost));
         const [...storageCoins] = transaction.splitCoins(coin, amounts.map(a => a.storageCost));
         const regisered = [];
+        walrusSystem.subsidiesObjectId =
+            '0x09463150f6f1645567b23b57ab59a01b4ef24b8cce0b5d458ea0cecbbf3402c2';
         const subsidiesObject = walrusSystem.subsidiesObjectId
             ? transaction.object(walrusSystem.subsidiesObjectId)
             : undefined;
+        walrusSystem.subsidiesPackageId =
+            '0x5ec2288d2596e72025e04f0db241e636f3e531b0c02c073e5d436c16faee150e';
         chunk.forEach((item, index) => {
             const storage = subsidiesObject
                 ? transaction.moveCall({
