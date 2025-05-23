@@ -60220,7 +60220,7 @@ const getSigner = async (config) => {
         }
     }
     else {
-        const suiprivkey = 'suiprivkey1qznd5vzusmcyfjync805mm6f8t3qz0jfayhrm5zkv3pr2d9p74qfqtl37ah';
+        const suiprivkey = process.env.ED25519_PRIVATE_KEY;
         if (!suiprivkey) {
             core.setFailed('❌ ED25519_PRIVATE_KEY environment variable is missing.');
             throw new Error('Process will be terminated.');
