@@ -154,7 +154,7 @@ export const createSite = async ({
       await (signer as GitSigner).signPersonalMessage(message, true);
     }
   } else {
-    const url = `http://${b36}.localhost:3000`;
+    const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
     core.info(`\n🌐 ${url}`);
     core.info(`👉 You can test this Walrus Site locally.`);
     if (isGitSigner) {

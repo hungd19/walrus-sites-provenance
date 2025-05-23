@@ -154,7 +154,7 @@ export const registerBlobs = async ({
       amounts.map(a => a.storageCost),
     );
 
-    core.info(JSON.stringify(walrusSystem));
+    // core.info(JSON.stringify(walrusSystem));
 
     const regisered: TransactionResult[] = [];
 

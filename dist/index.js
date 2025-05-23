@@ -58984,7 +58984,7 @@ const registerBlobs = async ({ config, suiClient, walrusClient, walrusSystem, gr
         });
         const [...writeCoins] = transaction.splitCoins(coin, amounts.map(a => a.writeCost));
         const [...storageCoins] = transaction.splitCoins(coin, amounts.map(a => a.storageCost));
-        core.info(JSON.stringify(walrusSystem));
+        // core.info(JSON.stringify(walrusSystem));
         const regisered = [];
         const subsidiesObject = walrusSystem.subsidiesObjectId
             ? transaction.object(walrusSystem.subsidiesObjectId)
@@ -59229,6 +59229,7 @@ const main = async () => {
         blobs: blobsWithNodes,
         signer,
     });
+    config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
     // STEP 5: Create Site with Resources
     if (config.site_obj_id) {
         core.info('\n🛠️ Update Site with Resources...');
@@ -59408,7 +59409,7 @@ const createSite = async ({ config, suiClient, walrusSystem, blobs, signer, isGi
         }
     }
     else {
-        const url = `http://${b36}.localhost:3000`;
+        const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
         core.info(`\n🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
@@ -59850,7 +59851,7 @@ const updateSite = async ({ config, suiClient, walrusClient, walrusSystem, blobs
         }
     }
     else {
-        const url = `http://${b36}.localhost:3000`;
+        const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
         core.info(`🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
@@ -60219,7 +60220,7 @@ const getSigner = async (config) => {
         }
     }
     else {
-        const suiprivkey = process.env.ED25519_PRIVATE_KEY;
+        const suiprivkey = 'suiprivkey1qznd5vzusmcyfjync805mm6f8t3qz0jfayhrm5zkv3pr2d9p74qfqtl37ah';
         if (!suiprivkey) {
             core.setFailed('❌ ED25519_PRIVATE_KEY environment variable is missing.');
             throw new Error('Process will be terminated.');

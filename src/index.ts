@@ -84,6 +84,8 @@ const main = async (): Promise<void> => {
     signer,
   });
 
+  config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
+
   // STEP 5: Create Site with Resources
   if (config.site_obj_id) {
     core.info('\n🛠️ Update Site with Resources...');
