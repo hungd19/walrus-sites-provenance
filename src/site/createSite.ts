@@ -144,8 +144,9 @@ export const createSite = async ({
   }
 
   const b36 = hexToBase36(siteObjectId);
+  let url;
   if (config.network === 'mainnet') {
-    const url = `http://${b36}.wal.app`;
+    url = `http://${b36}.wal.app`;
     core.info(`\n🌐 ${url}`);
     core.info(`⚠️ To perform upgrades later, add this to your site.config.json:`);
     core.info(`  "site_obj_id": "${siteObjectId}"`);
@@ -154,7 +155,7 @@ export const createSite = async ({
       await (signer as GitSigner).signPersonalMessage(message, true);
     }
   } else {
-    const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+    url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
     core.info(`\n🌐 ${url}`);
     core.info(`👉 You can test this Walrus Site locally.`);
     if (isGitSigner) {
@@ -162,4 +163,6 @@ export const createSite = async ({
       await (signer as GitSigner).signPersonalMessage(message, true);
     }
   }
+
+  return url;
 };

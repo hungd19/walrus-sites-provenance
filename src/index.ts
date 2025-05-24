@@ -84,12 +84,13 @@ const main = async (): Promise<void> => {
     signer,
   });
 
-  config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
+  // config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
 
   // STEP 5: Create Site with Resources
+  let url;
   if (config.site_obj_id) {
     core.info('\n🛠️ Update Site with Resources...');
-    await updateSite({
+    url = await updateSite({
       config,
       suiClient,
       walrusClient,
@@ -101,7 +102,7 @@ const main = async (): Promise<void> => {
     });
   } else {
     core.info('\n🛠️ Creating Site with Resources...');
-    await createSite({
+    url = await createSite({
       config,
       suiClient,
       walrusSystem,
@@ -109,6 +110,25 @@ const main = async (): Promise<void> => {
       signer,
       isGitSigner,
     });
+  }
+
+  const projectId = process.env.PROJECT_ID || `project_tmp_${+new Date()/1000}`;
+  core.info(`🛠️ Updating ProjectID: ${projectId} with domain ${url}`);
+  try {
+    const nftServerUrl = 'https://market.suinova.var-meta.com/api/project-domains';
+    const data = {
+      projectId,
+      url
+    };
+    const response = await fetch(nftServerUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    core.error(JSON.stringify(error));
   }
 };
 

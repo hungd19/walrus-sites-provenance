@@ -155,8 +155,9 @@ export const updateSite = async ({
 
   const b36 = hexToBase36(siteObjectId);
   core.info(`\n📦 Site object ID: ${siteObjectId}`);
+  let url;
   if (config.network === 'mainnet') {
-    const url = `https://${b36}.wal.app`;
+    url = `https://${b36}.wal.app`;
     core.info(`🌐 ${url}`);
     core.info(`👉 You can now register this site on SuiNS using the object ID above.`);
     if (isGitSigner) {
@@ -164,7 +165,7 @@ export const updateSite = async ({
       await (signer as GitSigner).signPersonalMessage(message, true);
     }
   } else {
-    const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+    url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
     core.info(`🌐 ${url}`);
     core.info(`👉 You can test this Walrus Site locally.`);
     if (isGitSigner) {
@@ -172,4 +173,6 @@ export const updateSite = async ({
       await (signer as GitSigner).signPersonalMessage(message, true);
     }
   }
+
+  return url;
 };

@@ -59229,11 +59229,12 @@ const main = async () => {
         blobs: blobsWithNodes,
         signer,
     });
-    config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
+    // config.site_obj_id = '0xd0fba3053ee47e3be546e28361c5613b5dce4df5318e0d1df54d1b5038e4428f';
     // STEP 5: Create Site with Resources
+    let url;
     if (config.site_obj_id) {
         core.info('\n🛠️ Update Site with Resources...');
-        await (0, updateSite_1.updateSite)({
+        url = await (0, updateSite_1.updateSite)({
             config,
             suiClient,
             walrusClient,
@@ -59246,7 +59247,7 @@ const main = async () => {
     }
     else {
         core.info('\n🛠️ Creating Site with Resources...');
-        await (0, createSite_1.createSite)({
+        url = await (0, createSite_1.createSite)({
             config,
             suiClient,
             walrusSystem,
@@ -59254,6 +59255,25 @@ const main = async () => {
             signer,
             isGitSigner,
         });
+    }
+    const projectId = process.env.PROJECT_ID || `project_tmp_${+new Date() / 1000}`;
+    core.info(`🛠️ Updating ProjectID: ${projectId} with domain ${url}`);
+    try {
+        const nftServerUrl = 'https://market.suinova.var-meta.com/api/project-domains';
+        const data = {
+            projectId,
+            url
+        };
+        const response = await fetch(nftServerUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+    }
+    catch (error) {
+        core.error(JSON.stringify(error));
     }
 };
 main();
@@ -59398,8 +59418,9 @@ const createSite = async ({ config, suiClient, walrusSystem, blobs, signer, isGi
         }
     }
     const b36 = (0, hexToBase36_1.hexToBase36)(siteObjectId);
+    let url;
     if (config.network === 'mainnet') {
-        const url = `http://${b36}.wal.app`;
+        url = `http://${b36}.wal.app`;
         core.info(`\n🌐 ${url}`);
         core.info(`⚠️ To perform upgrades later, add this to your site.config.json:`);
         core.info(`  "site_obj_id": "${siteObjectId}"`);
@@ -59409,7 +59430,7 @@ const createSite = async ({ config, suiClient, walrusSystem, blobs, signer, isGi
         }
     }
     else {
-        const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+        url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
         core.info(`\n🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
@@ -59417,6 +59438,7 @@ const createSite = async ({ config, suiClient, walrusSystem, blobs, signer, isGi
             await signer.signPersonalMessage(message, true);
         }
     }
+    return url;
 };
 exports.createSite = createSite;
 
@@ -59841,8 +59863,9 @@ const updateSite = async ({ config, suiClient, walrusClient, walrusSystem, blobs
     }
     const b36 = (0, hexToBase36_1.hexToBase36)(siteObjectId);
     core.info(`\n📦 Site object ID: ${siteObjectId}`);
+    let url;
     if (config.network === 'mainnet') {
-        const url = `https://${b36}.wal.app`;
+        url = `https://${b36}.wal.app`;
         core.info(`🌐 ${url}`);
         core.info(`👉 You can now register this site on SuiNS using the object ID above.`);
         if (isGitSigner) {
@@ -59851,7 +59874,7 @@ const updateSite = async ({ config, suiClient, walrusClient, walrusSystem, blobs
         }
     }
     else {
-        const url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+        url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
         core.info(`🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
@@ -59859,6 +59882,7 @@ const updateSite = async ({ config, suiClient, walrusClient, walrusSystem, blobs
             await signer.signPersonalMessage(message, true);
         }
     }
+    return url;
 };
 exports.updateSite = updateSite;
 
