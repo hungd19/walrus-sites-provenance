@@ -40,7 +40,7 @@ export const loadConfig = (): SiteConfig => {
         ...getDefaultConfig().metadata,
         ...(parsed.metadata || {}),
         link: 'https://suinova.var-meta.com',
-        image_url: 'https://dev-suinova.s3.ap-southeast-1.amazonaws.com/81be9f11c7b06a662792194293c4799b.jpg',
+        image_url: 'https://dev-suinova.s3.ap-southeast-1.amazonaws.com/9091b0b6366dfb7490b7aeddee78d842.jpg',
         name: 'suinova.var-meta.com',
         description: 'Build decentralized web app and deploy to Walrus',
         project_url: 'https://github.com/VAR-META-Tech',
