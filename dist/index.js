@@ -59430,7 +59430,7 @@ const createSite = async ({ config, suiClient, walrusSystem, blobs, signer, isGi
         }
     }
     else {
-        url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+        url = `http://${b36}.var-meta.duckdns.org:3000`;
         core.info(`\n🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
@@ -59874,7 +59874,7 @@ const updateSite = async ({ config, suiClient, walrusClient, walrusSystem, blobs
         }
     }
     else {
-        url = `http://${b36}.var-meta.duckdns.org:3000/connect-wallet-view-minting-nft-details`;
+        url = `http://${b36}.var-meta.duckdns.org:3000`;
         core.info(`🌐 ${url}`);
         core.info(`👉 You can test this Walrus Site locally.`);
         if (isGitSigner) {
